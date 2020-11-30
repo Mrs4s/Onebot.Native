@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Threading;
@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Onebot.Native.Core;
 using Onebot.Native.Core.Extensions;
 using Onebot.Native.Forms;
+using Onebot.Native.IO;
 using Onebot.Native.Models;
 using Onebot.Native.Models.Onebot;
 
@@ -29,6 +30,9 @@ namespace Onebot.Native
             };
             Thread.Sleep(1000000);
             */
+            //插件路径初始化
+            Storage.InitAppStorage();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var _ = LogViewer.Form;
