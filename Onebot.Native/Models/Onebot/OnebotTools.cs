@@ -20,12 +20,19 @@ namespace Onebot.Native.Models.Onebot
                 var data = item["data"].ToObject<Dictionary<string, string>>();
                 if (type == "text")
                 {
-                    msg += data["text"];
+                    msg += CQCodeEscapeText(data["text"]);
                     continue;
                 }
-                msg += $"[CQ:{type},{string.Join(",", data.Select(v => v.Key + "=" + v.Value))}]";
+                msg += $"[CQ:{type},{string.Join(",", data.Select(v => v.Key + "=" + CQCodeEscapeValue(v.Value)))}]";
             }
             return msg;
         }
+
+        public static string CQCodeEscapeText(string text) => text
+            .Replace("&", "&amp;")
+            .Replace("[", "&#91;")
+            .Replace("]", "&#93;");
+
+        public static string CQCodeEscapeValue(string value) => CQCodeEscapeText(value).Replace(",", "&#44;");
     }
 }
